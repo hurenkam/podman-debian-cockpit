@@ -4,7 +4,10 @@ Debian Linux (v12 - bookworm) running systemd and cockpit
 
 ## How to use this image:
 
-### Build it from source:
+### Pull it from the repo:
+`podman pull ghcr.io/hurenkam/debian-cockpit:bookworm`
+
+### Or build it from source:
 `podman build . -t debian-cockpit`
 
 ### Create the container:
