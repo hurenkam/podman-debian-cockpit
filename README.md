@@ -35,7 +35,7 @@ or use ssh -p 2222 localhost to log into a console.
 
 
 ## Source:
-- https://github.com/hurenkam/docker-debian-cockpit/
+- https://github.com/hurenkam/cockpit-debian-cockpit/
 
  
 ## Credits:
