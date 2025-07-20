@@ -6,8 +6,9 @@ on:
       - main
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 jobs:
   build-and-push:
@@ -16,32 +17,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+      - name: Log in to ghcr.io
+        uses: redhat-actions/podman-login@v1
         with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.IMAGE_REGISTRY }}
 
-
-          #- name: Set up Podman
-          #uses: redhat-actions/podman-login@v1
-
-      - name: Build and push image
-        uses: docker/build-push-action@v2
-        with: 
-          tags: ${{ github.repository_owner }}/debian-cockpit:bookworm
-          push: true
-
-            #run: |
-            #podman build -t debian-cockpit:bookworm .
-            #podman push debian-cockpit:bookworm
-          #env:
-          # Use secrets for authentication
-          # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          # DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          # DOCKER_REGISTRY: docker.io
-
-      - name: Clean up
-        run: |
-          podman image prune -a -f
