@@ -27,6 +27,6 @@ jobs:
       - name: Build and push image
         run: |
           podman build -t debian-cockpit:bookworm .
-          podman push ${{ env.IMAGE_REGISTRY }}/debian-cockpit:bookworm
+          podman push debian-cockpit:bookworm ${{ env.IMAGE_REGISTRY }}
 
 
