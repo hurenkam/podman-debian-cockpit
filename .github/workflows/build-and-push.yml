@@ -1,0 +1,30 @@
+name: Build and Push Podman Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Podman
+        uses: redhat-actions/podman-login@v1
+
+      - name: Build and push image
+        run: |
+          podman build -t debian-cockpit:bookworm .
+          podman push debian-cockpit:bookworm
+        env:
+          # Use secrets for authentication
+          # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          # DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          # DOCKER_REGISTRY: docker.io
+
+      - name: Clean up
+        run: |
+          podman image prune -a -f
