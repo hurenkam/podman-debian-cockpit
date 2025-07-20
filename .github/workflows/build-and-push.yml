@@ -28,9 +28,14 @@ jobs:
           #uses: redhat-actions/podman-login@v1
 
       - name: Build and push image
-        run: |
-          podman build -t debian-cockpit:bookworm .
-          podman push debian-cockpit:bookworm
+        uses: docker/build-push-action@v2
+        with: 
+          tags: ${{ github.repository_owner }}/debian-cockpit:bookworm
+          push: true
+
+            #run: |
+            #podman build -t debian-cockpit:bookworm .
+            #podman push debian-cockpit:bookworm
           #env:
           # Use secrets for authentication
           # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
