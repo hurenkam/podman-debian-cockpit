@@ -18,8 +18,8 @@ jobs:
       - name: Build and push image
         run: |
           podman build -t debian-cockpit:bookworm .
-          podman push debian-cockpit:bookworm
-        env:
+          #podman push debian-cockpit:bookworm
+          #env:
           # Use secrets for authentication
           # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           # DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
