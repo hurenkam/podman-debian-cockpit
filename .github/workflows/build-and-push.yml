@@ -24,3 +24,9 @@ jobs:
           password: ${{ env.REGISTRY_PASSWORD }}
           registry: ${{ env.IMAGE_REGISTRY }}
 
+      - name: Build and push image
+        run: |
+          podman build -t debian-cockpit:bookworm .
+          podman push debian-cockpit:bookworm
+
+
