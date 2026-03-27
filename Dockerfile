@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:trixie
 MAINTAINER Mark Hurenkamp <mark.hurenkamp@xs4all>
 
 
@@ -42,7 +42,7 @@ RUN rm -f \
     /var/lib/dbus/machine-id
 
 # remove deleted files from intermediate layers
-FROM debian:bookworm
+FROM debian:trixie
 COPY --from=0 / /
 
 
